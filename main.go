@@ -57,9 +57,6 @@ func makeForm(win fyne.Window) fyne.CanvasObject {
 			{Text: "API Key", Widget: apiKey},
 			{Text: "HTTPS Proxy", Widget: proxy},
 		},
-		OnCancel: func() {
-			fmt.Println("Cancelled")
-		},
 		OnSubmit: func() {
 			fmt.Println("Form submitted")
 			if target.Text == "" {
@@ -81,6 +78,7 @@ func makeForm(win fyne.Window) fyne.CanvasObject {
 			}
 			if apiKey.Text == "" {
 				dialog.ShowError(errors.New("API Key cannot be empty"), win)
+				return
 			}
 
 			config := &u2.Config{
@@ -98,12 +96,24 @@ func makeForm(win fyne.Window) fyne.CanvasObject {
 			} else if config.Target == "Deluge" {
 				config.Target = "deluge"
 			}
-			tool.InitClient(config)
 
-			tool.TurnOnSilentMode()
-			tool.ProcessTorrent()
+			defer func() {
+				if err := recover(); err != nil {
+					fmt.Println("Error while resetting key!")
+					fmt.Println(err)
+					dialog.ShowError(errors.New("error while resetting key, see log for details"), win)
+				}
+			}()
+			doReset(config)
 		},
 	}
 
 	return fyne.NewContainerWithLayout(layout.NewMaxLayout(), form)
+}
+
+func doReset(config *u2.Config) {
+	tool.InitClient(config)
+
+	tool.TurnOnSilentMode()
+	tool.ProcessTorrent()
 }
