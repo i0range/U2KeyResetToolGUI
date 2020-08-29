@@ -26,17 +26,20 @@ jobs:
     - name: Get cross build tool
       run: go get github.com/lucor/fyne-cross/v2/cmd/fyne-cross
 
-    - name: Build Windows
-      run: fyne-cross windows -arch=*
+    - name: Test build
+      - run: go build
 
     - name: Create a Release
       id: create_release
       uses: actions/create-release@v1
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
+
+    - name: Build Windows
+      run: fyne-cross windows -arch=*
 
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
