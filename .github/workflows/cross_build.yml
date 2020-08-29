@@ -2,9 +2,8 @@ name: Cross Build
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -30,10 +29,32 @@ jobs:
     - name: Build Windows
       run: fyne-cross windows -arch=*
 
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.1.4
+    - name: Create a Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        # Artifact name
-        # A file, directory or wildcard pattern that describes what to upload
-        path: fyne-cross/dist
+        tag_name: ${{ github.GITHUB_REF }}
+        release_name: Release ${{ github.GITHUB_REF }}
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: fyne-cross/dist/windows-386/U2KeyResetToolGUI.exe.zip
+        asset_name: U2KeyResetToolGUI_win_i386.zip
+        asset_content_type: application/zip
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: fyne-cross/dist/windows-amd64/U2KeyResetToolGUI.exe.zip
+        asset_name: U2KeyResetToolGUI_win_x86_64.zip
+        asset_content_type: application/zip
 
