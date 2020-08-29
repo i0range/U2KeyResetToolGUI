@@ -26,6 +26,9 @@ jobs:
     - name: Get cross build tool
       run: go get github.com/lucor/fyne-cross/v2/cmd/fyne-cross
 
+    - name: Install required libs
+      run: sudo apt-get install xorg-dev libgl1-mesa-dev
+
     - name: Test build
       run: go build
 
