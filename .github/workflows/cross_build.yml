@@ -27,7 +27,7 @@ jobs:
       run: go get github.com/lucor/fyne-cross/v2/cmd/fyne-cross
 
     - name: Test build
-      - run: go build
+      run: go build
 
     - name: Create a Release
       id: create_release
