@@ -20,7 +20,7 @@ import (
 )
 
 func main() {
-	os.Setenv("FYNE_FONT", "C:\\Windows\\msyh.ttc")
+	os.Setenv("FYNE_FONT", "C:\\Windows\\Fonts\\msyh.ttc")
 	defer os.Unsetenv("FYNE_FONT")
 	guiApp := app.New()
 
