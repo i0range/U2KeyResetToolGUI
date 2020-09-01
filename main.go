@@ -20,6 +20,8 @@ import (
 )
 
 func main() {
+	os.Setenv("FYNE_FONT", "C:\\Windows\\msyh.ttc")
+	defer os.Unsetenv("FYNE_FONT")
 	guiApp := app.New()
 
 	w := guiApp.NewWindow("U2 Key Reset Tool")
@@ -91,10 +93,6 @@ func makeForm(win fyne.Window, guiApp *fyne.App) fyne.CanvasObject {
 	container := fyne.NewContainerWithLayout(layout.NewMaxLayout(), form)
 
 	form.OnSubmit = func() {
-		logWin, logEntity := makeLogWin(&win, guiApp)
-		(*logWin).Show()
-		win.Hide()
-
 		if target.Text == "" {
 			dialog.ShowError(errors.New("please select target"), win)
 			return
@@ -132,6 +130,10 @@ func makeForm(win fyne.Window, guiApp *fyne.App) fyne.CanvasObject {
 		} else if config.Target == "Deluge" {
 			config.Target = "deluge"
 		}
+
+		logWin, logEntity := makeLogWin(&win, guiApp)
+		(*logWin).Show()
+		win.Hide()
 
 		logEntity.SetText(logEntity.Text + "Submitted\n")
 
