@@ -40,6 +40,8 @@ github.com/i0range/U2KeyResetTool v0.0.9 h1:esMg9xg9uQiZsniKJ2XKyss13hYk5p0Dn7X4
 github.com/i0range/U2KeyResetTool v0.0.9/go.mod h1:CscfdEr0r+3PEAZ0F4R8v2U30TIjQc0bZbV4JPBlR1k=
 github.com/i0range/U2KeyResetTool v0.0.10 h1:O0h18eCV6bM9W4UXcKJrbzqxHLeKRNlTdPFV1XlZjks=
 github.com/i0range/U2KeyResetTool v0.0.10/go.mod h1:CscfdEr0r+3PEAZ0F4R8v2U30TIjQc0bZbV4JPBlR1k=
+github.com/i0range/U2KeyResetTool v0.0.11 h1:cAbO0GIfOasykCdO0CY+DZswIYj2v1XE3pwegOJOnjk=
+github.com/i0range/U2KeyResetTool v0.0.11/go.mod h1:CscfdEr0r+3PEAZ0F4R8v2U30TIjQc0bZbV4JPBlR1k=
 github.com/i0range/go-qbittorrent v0.0.0-20200829122403-167ccd7e67e8 h1:k7ztYHu6u39sD9hNHi2njUO6Z20ZT1gJOcSXcToqWMw=
 github.com/i0range/go-qbittorrent v0.0.0-20200829122403-167ccd7e67e8/go.mod h1:FMs4+0oHD4sg/alEYQzo0BhTl5sv3QHGaBMvGJtX1s0=
 github.com/jackmordaunt/icns v0.0.0-20181231085925-4f16af745526/go.mod h1:UQkeMHVoNcyXYq9otUupF7/h/2tmHlhrS2zw7ZVvUqc=
